@@ -1,0 +1,37 @@
+import React from "react";
+// component name should be started-- with
+function withCounter(PassedComponent, initialCount = 0) {
+
+    class WrappedComponent extends React.Component {
+        state = {
+            count: initialCount
+        }
+
+        incrementCount = () => {
+            this.setState({
+                count: this.state.count + 1
+            })
+        }
+
+        decrementCount = () => {
+            this.setState({
+                count: this.state.count - 1
+            })
+        }
+
+        render() {
+            return (
+
+                <PassedComponent
+                    count={this.state.count}
+                    increment={this.incrementCount}
+                    decrement={this.decrementCount}
+                    {...this.props}
+
+                />
+            )
+        }
+    }
+    return WrappedComponent
+}
+export default withCounter
